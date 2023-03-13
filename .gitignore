@@ -1,0 +1,8 @@
+build
+build_sec*
+.vscode
+
+.vs
+.vs/*
+*.exe
+
