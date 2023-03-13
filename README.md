@@ -1,4 +1,4 @@
-# The IOT Router application
+# The KNX IOT Router application
 
 The following applications are in this folder:
 
@@ -48,6 +48,11 @@ handling the GUI (wxWidgets) and embedded (chili) to connect to the hardware.
 - serial number : 00FA10019000
 - password : U3GNY3906MSRDNG8MUR1
 - QR info : KNX:S:00FA10019000;P:U3GNY3906MSRDNG8MUR1
+
+### Functional block
+
+- f/netip, listing the netip data points)
+- fp/gm, Table
 
 ### Data points
 
