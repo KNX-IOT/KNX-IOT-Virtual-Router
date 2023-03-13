@@ -1,5 +1,5 @@
-![Linux](https://github.com/KNX-IOT/KNX_IOT_IOT_ROUTER/actions/workflows/cmake-linux.yml/badge.svg)
-![Windows](https://github.com/KNX-IOT/KNX_IOT_IOT_ROUTER/actions/workflows/cmake-windows.yml/badge.svg)
+![Linux](https://github.com/KNX-IOT/KNX_VIRTUAL_IOT_ROUTER/actions/workflows/cmake-linux.yml/badge.svg)
+![Windows](https://github.com/KNX-IOT/KNX_VIRTUAL_IOT_ROUTER/actions/workflows/cmake-windows.yml/badge.svg)
 
 
 # The KNX IoT Router application
