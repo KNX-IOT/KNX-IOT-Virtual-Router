@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.16)
 project(knx_virtual_iot_router  C CXX ASM)
 
 # Copyright (c) 2022-2023 Cascoda Ltd
