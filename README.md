@@ -1,3 +1,7 @@
+![Linux](https://github.com/KNX-IOT/KNX_IOT_IOT_ROUTER/actions/workflows/cmake-linux.yml/badge.svg)
+![Windows](https://github.com/KNX-IOT/KNX_IOT_IOT_ROUTER/actions/workflows/cmake-windows.yml/badge.svg)
+
+
 # The KNX IoT Router application
 
 A KNX IoT Router is the router functionality between KNX IoT and KNX/NetIP and KNX/TP.
