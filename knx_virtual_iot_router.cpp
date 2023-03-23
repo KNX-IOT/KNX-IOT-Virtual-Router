@@ -16,7 +16,7 @@
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 */
-// 2023-03-13 10:05:12.670773
+// 2023-03-23 14:08:39.126883
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
@@ -798,12 +798,16 @@ void MyFrame::OnGroupMappingTable(wxCommandEvent& event)
           sprintf(line, "\n");
           strcat(text, line);
         
-          strcpy(line, "auth :");
+          strcpy(line, "  auth :");
           this->bool2text(my_entry->authentication, line);
           strcat(text, line);
+          sprintf(line, "\n");
+          strcat(text, line);
         
-          strcpy(line, "conv :");
+          strcpy(line, "  conv :");
           this->bool2text(my_entry->confidentiality, line);
+          strcat(text, line);
+          sprintf(line, "\n");
           strcat(text, line);
         }
       }
@@ -875,7 +879,7 @@ void MyFrame::OnAbout(wxCommandEvent& event)
   
   strcat(text, "(c) Cascoda Ltd\n");
   strcat(text, "(c) KNX.org\n");
-  strcat(text, "2023-03-13 10:05:12.670773");
+  strcat(text, "2023-03-23 14:08:39.126883");
   CustomDialog("About", text);
 }
 
