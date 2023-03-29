@@ -20,7 +20,7 @@
  * @file
  * 
  * KNX virtual IoT Router
- * 2023-03-13 10:05:12.037505
+ * 2023-03-29 14:46:28.043024
  * ## Application Design
  *
  * support functions:
@@ -341,6 +341,28 @@ int app_init(void);
 }
 #endif
 
+// DEVBOARD code
+
+/**
+ * @brief devboard button toggle callback
+ *
+ */
+void dev_btn_toggle_cb(char *url)
+{
+  printf("Handling %s\n", url);
+  bool val = app_retrieve_bool_variable(url);
+  if (val == true)
+  {
+    val = false;
+  }
+  else
+  {
+    val = true;
+  }
+  app_set_bool_variable(url, val);
+  oc_do_s_mode_with_scope(5, url, "w");
+}
+
 /**
  * @brief s-mode response callback
  * will be called when a response is received on an s-mode read request
@@ -381,7 +403,6 @@ app_init(void)
   ret |= oc_add_device(MY_NAME, "1.0.0", "//", g_serial_number, NULL, NULL);
 
   oc_device_info_t *device = oc_core_get_device_info(0);
-  PRINT("Serial Number: %s\n", oc_string(device->serialnumber));
 
   
   /* set the hardware version 0.1.3 */
@@ -402,8 +423,9 @@ app_init(void)
 #define PASSWORD "U3GNY3906MSRDNG8MUR1"
 #ifdef OC_SPAKE
   oc_spake_set_password(PASSWORD);
-  PRINT(" SPAKE password %s\n", PASSWORD);
 
+
+  printf("\n === QR Code: KNX:S:%s;P:%s ===\n", oc_string(device->serialnumber), PASSWORD);
 #endif
 
   return ret;

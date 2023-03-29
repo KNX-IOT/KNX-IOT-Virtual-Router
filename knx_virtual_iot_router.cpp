@@ -16,7 +16,7 @@
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 */
-// 2023-03-23 14:08:39.126883
+// 2023-03-29 14:46:28.200146
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
@@ -34,11 +34,12 @@
 
 enum
 {
-  RESET = wxID_HIGHEST + 1,  // ID for reset button in the menu
-  IA_TEXT = RESET + 1,       // ID for internal address text 
-  IID_TEXT = IA_TEXT + 1,    // ID for installation id text 
-  PM_TEXT = IID_TEXT + 1,    // ID for programming mode text 
-  LS_TEXT = PM_TEXT + 1,     // ID for load status text 
+  RESET = wxID_HIGHEST + 1,   // ID for reset button in the menu
+  RESET_TABLE = RESET + 1,    // ID for clear table button in the menu
+  IA_TEXT = RESET_TABLE + 1,  // ID for internal address text 
+  IID_TEXT = IA_TEXT + 1,     // ID for installation id text 
+  PM_TEXT = IID_TEXT + 1,     // ID for programming mode text 
+  LS_TEXT = PM_TEXT + 1,      // ID for load status text 
   HOSTNAME_TEXT = LS_TEXT + 1, // ID for hostname text 
   GOT_TABLE_ID = HOSTNAME_TEXT + 1, // ID for the Group object window
   PUB_TABLE_ID = GOT_TABLE_ID + 1, // ID for the publisher table window
@@ -123,6 +124,7 @@ private:
   void OnAuthTable(wxCommandEvent& event);
   void OnProgrammingMode(wxCommandEvent& event);
   void OnReset(wxCommandEvent& event);
+  void OnClearTables(wxCommandEvent& event);
   void OnNetIPData(wxCommandEvent& event);
   void OnGroupMappingTable(wxCommandEvent& event);
   void OnExit(wxCommandEvent& event);
@@ -196,7 +198,8 @@ MyFrame::MyFrame(char* str_serial_number)
   m_menuFile->Append(GM_TABLE_ID, "List Group Mapping Table", "List the group mapping of the device", false);
   m_menuFile->Append(NETIP_ID, "List NET/IP Data", "List the NET/IP of the device", false);
   m_menuFile->Append(CHECK_PM, "Programming Mode", "Sets the application in programming mode", true);
-  m_menuFile->Append(RESET, "Reset (ex-factory)", "Reset the Device to ex-factory state", false);
+  m_menuFile->Append(RESET_TABLE, "Reset (7) (Tables)", "Reset 7 (Reset to default without IA).", false);
+  m_menuFile->Append(RESET, "Reset (2)(ex-factory)", "Reset 2 (Reset to default state)", false);
   m_menuFile->AppendSeparator();
   m_menuFile->Append(wxID_EXIT);
   // display menu
@@ -219,6 +222,7 @@ MyFrame::MyFrame(char* str_serial_number)
   CreateStatusBar();
   SetStatusText("Welcome to KNX virtual IoT Router!");
   Bind(wxEVT_MENU, &MyFrame::OnReset, this, RESET);
+  Bind(wxEVT_MENU, &MyFrame::OnClearTables, this, RESET_TABLE);
   Bind(wxEVT_MENU, &MyFrame::OnGroupObjectTable, this, GOT_TABLE_ID);
   Bind(wxEVT_MENU, &MyFrame::OnPublisherTable, this, PUB_TABLE_ID);
   Bind(wxEVT_MENU, &MyFrame::OnRecipientTable, this, REC_TABLE_ID);
@@ -381,6 +385,21 @@ void MyFrame::updateTextButtons()
   m_hostname_text->SetLabelText(text);
   // reset the programming mode to what the device has
   m_menuFile->Check(CHECK_PM, device->pm);
+}
+
+/**
+ * @brief clear the tables of the device
+ * 
+ * @param event command triggered by button in the menu
+ */
+void MyFrame::OnClearTables(wxCommandEvent& event)
+{
+  int device_index = 0;
+  SetStatusText("Clear Tables");
+  // reset the device
+  oc_knx_device_storage_reset(device_index, 7);
+  // update the UI
+  this->updateTextButtons();
 }
 
 /**
@@ -879,7 +898,7 @@ void MyFrame::OnAbout(wxCommandEvent& event)
   
   strcat(text, "(c) Cascoda Ltd\n");
   strcat(text, "(c) KNX.org\n");
-  strcat(text, "2023-03-23 14:08:39.126883");
+  strcat(text, "2023-03-29 14:46:28.200146");
   CustomDialog("About", text);
 }
 
@@ -903,12 +922,26 @@ void MyFrame::OnTimer(wxTimerEvent& event)
   this->updateTextButtons();
 }
 
+
+/**
+ * @brief update the UI e.g. check boxes in the UI
+ * updates:
+ * does a oc_main_poll to give a tick to the stack
+ * 
+ * @param event triggered by a timer
+ */
 void  MyFrame::updateInfoCheckBoxes()
 {
   bool p;
 
 }
 
+/**
+ * @brief convert the boolean to text for display
+ * 
+ * @param on_off the boolean
+ * @param text the text to add the boolean as text
+ */
 void MyFrame::bool2text(bool on_off, char* text)
 {
   if (on_off) {
@@ -919,6 +952,13 @@ void MyFrame::bool2text(bool on_off, char* text)
   }
 }
 
+/**
+ * @brief convert the integer to text for display
+ * 
+ * @param on_off the integer
+ * @param text the text to add info too
+ * @param as_ets the text as terminology as used in ets
+ */
 void MyFrame::int2text(int value, char* text, bool as_ets)
 {
   char value_text[50];
@@ -946,6 +986,12 @@ void MyFrame::int2text(int value, char* text, bool as_ets)
   }
 }
 
+/**
+ * @brief convert the scope to text for display
+ * 
+ * @param value the scope
+ * @param text the text to add info too
+ */
 void MyFrame::int2scopetext(uint32_t value, char* text)
 {
   char value_text[150];
@@ -969,6 +1015,13 @@ void MyFrame::int2scopetext(uint32_t value, char* text)
   if (value & (1 << 14)) strcat(text, " if.m");
 }
 
+/**
+ * @brief convert the group id to text for display
+ * 
+ * @param value the group id
+ * @param text the text to add info too
+ * @param as_ets the text as terminology as used in ets
+ */
 void MyFrame::int2grpidtext(uint64_t value, char* text, bool as_ets)
 {
   char value_text[50];
@@ -1007,6 +1060,12 @@ void MyFrame::int2grpidtext(uint64_t value, char* text, bool as_ets)
   }
 }
 
+/**
+ * @brief convert the double (e.g. float)  to text for display
+ * 
+ * @param value the vlue
+ * @param text the text to add info too
+ */
 void MyFrame::double2text(double value, char* text)
 {
   char new_text[200];
@@ -1014,6 +1073,10 @@ void MyFrame::double2text(double value, char* text)
   strcat(text, new_text);
 }
 
+/**
+ * @brief update the buttons
+ * 
+ */
 void  MyFrame::updateInfoButtons()
 {
   char text[200];

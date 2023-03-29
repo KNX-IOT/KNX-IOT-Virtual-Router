@@ -24,7 +24,7 @@
  * e.g. if the c code is compiled without main then 
  * these functions can be used to call all generated code
  *
- * 2023-03-13 10:05:12.486079
+ * 2023-03-29 14:46:28.091556
  */
 
 #include "oc_api.h"
@@ -240,6 +240,13 @@ bool app_is_secure();
  */
 char* app_get_password();
 
+/**
+ * @brief Function to be used as a callback for when a button is pressed.
+ *        This function will toggle the value of the url, and send a message.
+ * 
+ * @param url the url of the resource/data point
+ */
+void dev_btn_toggle_cb(char *url);
 
 #ifdef __cplusplus
 }
