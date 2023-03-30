@@ -13,6 +13,7 @@
     - [1.2.5. MetaData](#125-metadata)
   - [1.3. Building on Windows](#13-building-on-windows)
   - [1.4. Building on Linux](#14-building-on-linux)
+  - [5. Installation tools](#5-installation-tools)
 
 <!-- /TOC -->
 
@@ -44,7 +45,7 @@ The general structure of these programs are:
 
 ```
    __________________
-  | Application CODE |   <---- WxWidget, Printf, hardware connection
+  | Application CODE |   <---- WxWidget, Printf
   |__________________|
   |  POINT API CODE  |   <---- Generic code handling all Point API CoAP code
   |__________________|
@@ -136,6 +137,8 @@ scripts available:
 
 Note that one has to have access to the knx gitlab repo.
 
+Note: see also: https://github.com/KNX-IOT/KNX-IOT-Virtual
+
 ## 1.4. Building on Linux
 
 Note: the GUI variant is not available on Linux, only CLI will be build
@@ -154,6 +157,8 @@ To use knx gitlab as source of the KNX-IOT-STACK use the following command:
 
 Note that one has to have access to the knx gitlab repo.
 
-***
+Note: see also: https://github.com/KNX-IOT/KNX-IOT-Virtual
 
-2023-03-29 10:05:12.714872
+## 5. Installation tools
+
+please download the x-copy of ETS 6.
