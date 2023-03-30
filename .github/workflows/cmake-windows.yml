@@ -58,7 +58,7 @@ jobs:
 
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
 
     - name: Checkout Submodules
       run: git submodule update --init --recursive
@@ -170,5 +170,5 @@ jobs:
       with:
         name: knx_iot_router_${{ matrix.config.option_name }}
         path: |
-           D:/a/KNX-IOT/KNX_VIRTUAL_IOT_ROUTER/build_${{ matrix.config.option_name }}/knx_virtual_iot_router_gui.exe
-           D:/a/KNX-IOT/KNX_VIRTUAL_IOT_ROUTER/knx_virtual_iot_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
+           D:/a/KNX-IOT-Virtual-Router/KNX-IOT-Virtual-Router/build_${{ matrix.config.option_name }}/knx_virtual_iot_router_gui.exe
+           D:/a/KNX-IOT-Virtual-Router/KNX-IOT-Virtual-Router/knx_virtual_iot_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
