@@ -20,7 +20,7 @@
  * @file
  * 
  * KNX virtual IoT Router
- * 2023-03-29 14:46:28.043024
+ * 2023-03-30 16:22:23.105912
  * ## Application Design
  *
  * support functions:
@@ -389,7 +389,7 @@ oc_add_s_mode_response_cb(char *url, oc_rep_t *rep, oc_rep_t *rep_value)
  * - base path
  * - knx spec version 
  * - hardware version : [0, 1, 3]
- * - firmware version : [0, 1, 3]
+ * - firmware version : [0, 1, 4]
  * - hardware type    : Linux/windows
  * - device model     : KNX virtual IoT Router
  *
@@ -409,8 +409,8 @@ app_init(void)
   oc_core_set_device_hwv(0, 0, 1, 3);
   
   
-  /* set the firmware version 0.1.3 */
-  oc_core_set_device_fwv(0, 0, 1, 3);
+  /* set the firmware version 0.1.4 */
+  oc_core_set_device_fwv(0, 0, 1, 4);
   
 
   /* set the hardware type*/

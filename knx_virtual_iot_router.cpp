@@ -16,7 +16,7 @@
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 */
-// 2023-03-29 14:46:28.200146
+// 2023-03-30 16:22:23.250918
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
@@ -891,14 +891,14 @@ void MyFrame::OnAbout(wxCommandEvent& event)
   strcat(text,"model            : KNX virtual IoT Router\n");
   strcat(text,"hardware type    : Linux/windows\n");
   strcat(text,"hardware version : [0, 1, 3]\n");
-  strcat(text,"firmware version : [0, 1, 3]\n\n");
+  strcat(text,"firmware version : [0, 1, 4]\n\n");
   
   strcat(text, "data points:\n");
   strcat(text, "\n");
   
   strcat(text, "(c) Cascoda Ltd\n");
   strcat(text, "(c) KNX.org\n");
-  strcat(text, "2023-03-29 14:46:28.200146");
+  strcat(text, "2023-03-30 16:22:23.250918");
   CustomDialog("About", text);
 }
 
