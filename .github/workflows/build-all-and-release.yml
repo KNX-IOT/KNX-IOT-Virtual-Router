@@ -3,7 +3,10 @@ name: BuildAllAndRelease
 on:
   workflow_dispatch:
     branches: [main]
-
+    inputs:
+      release_tag_name:
+        description: 'release tag name e.g. "knx_vx.y.z"'
+        required: true
 env:
   MATRIX: "{ 
        \"config\": [
@@ -168,7 +171,8 @@ jobs:
       with:
         name: windows_knx_iot_virtual_router_${{ matrix.config.option_name }}
         path: |
-           ./win_build_${{ matrix.config.option_name }}/knx_iot_virtual_router.exe
+           ./win_build_${{ matrix.config.option_name }}/knx_iot_virtual_router_gui.exe
+           ./knx_virtual_iot_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
         
   # Build linux secured
   linuxSecured:
@@ -198,7 +202,7 @@ jobs:
         with:
           name: linux_knx_iot_virtual_router_secured
           path: |
-            ./linuxbuild/KNX-IOT-Virtual-Router
+            ./linuxbuild/knx_iot_virtual_router
 
   # Build linux unsecured
   linuxUnsecured:
@@ -228,7 +232,7 @@ jobs:
         with:
           name: linux_knx_iot_virtual_router_unsecured
           path: |
-            ./linuxbuild/KNX-IOT-Virtual-Router
+            ./linuxbuild/knx_virtual_iot_router
 
   makerelease:
     needs: [windowsBuilds, linuxSecured, linuxUnsecured]
@@ -249,8 +253,10 @@ jobs:
       id: releaseinfo
       run: |
         cd KNX-IOT-Virtual-Router
-        echo "version=$(git describe --tags --dirty --always --long | sed -E 's/-g[0-9a-f]+//g')" >> $GITHUB_OUTPUT
-        echo "title=$(git show -s --format=%B | head -n1)" >> $GITHUB_OUTPUT
+        #echo "version=$(git describe --tags --dirty --always --long | sed -E 's/-g[0-9a-f]+//g')" >> $GITHUB_OUTPUT
+        echo "version=${{ github.event.inputs.environment }} " >> $GITHUB_OUTPUT
+        #echo "title=$(git show -s --format=%B | head -n1)" >> $GITHUB_OUTPUT
+        echo "title=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
         msg=$(git show -s --format=%B)
         #escape special chars
         msg="${msg//'%'/'%25'}"
