@@ -254,9 +254,9 @@ jobs:
       run: |
         cd KNX-IOT-Virtual-Router
         #echo "version=$(git describe --tags --dirty --always --long | sed -E 's/-g[0-9a-f]+//g')" >> $GITHUB_OUTPUT
-        echo "version=${{ github.event.inputs.environment }} " >> $GITHUB_OUTPUT
+        echo "version=${{ github.event.inputs.release_tag_name }} " >> $GITHUB_OUTPUT
         #echo "title=$(git show -s --format=%B | head -n1)" >> $GITHUB_OUTPUT
-        echo "title=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+        echo "title=${{ github.event.inputs.release_tag_name }}" >> $GITHUB_OUTPUT
         msg=$(git show -s --format=%B)
         #escape special chars
         msg="${msg//'%'/'%25'}"
