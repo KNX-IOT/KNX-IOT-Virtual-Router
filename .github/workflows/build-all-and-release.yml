@@ -172,8 +172,7 @@ jobs:
         name: windows_knx_iot_virtual_router_${{ matrix.config.option_name }}
         path: |
            ./win_build_${{ matrix.config.option_name }}/knx_iot_virtual_router_gui.exe
-           cd ..
-           ./knx_virtual_iot_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
+           ./knx_iot_virtual_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
         
   # Build linux secured
   linuxSecured:
@@ -203,8 +202,8 @@ jobs:
         with:
           name: linux_knx_iot_virtual_router_secured
           path: |
-            ./linuxbuildsecured/knx_virtual_iot_router
-            ./knx_virtual_iot_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
+            ./linuxbuildsecured/knx_iot_virtual_router
+            ./knx_iot_virtual_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
 
   # Build linux unsecured
   linuxUnsecured:
@@ -234,8 +233,8 @@ jobs:
         with:
           name: linux_knx_iot_virtual_router_unsecured
           path: |
-            ./linuxbuild/knx_virtual_iot_router
-            ./knx_virtual_iot_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
+            ./linuxbuild/knx_iot_virtual_router
+            ./knx_iot_virtual_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
 
   makerelease:
     needs: [windowsBuilds, linuxSecured, linuxUnsecured]

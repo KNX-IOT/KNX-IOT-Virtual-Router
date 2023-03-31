@@ -170,5 +170,5 @@ jobs:
       with:
         name: win_knx_iot_router_${{ matrix.config.option_name }}
         path: |
-           D:/a/KNX-IOT-Virtual-Router/KNX-IOT-Virtual-Router/build_${{ matrix.config.option_name }}/knx_virtual_iot_router_gui.exe
-           D:/a/KNX-IOT-Virtual-Router/KNX-IOT-Virtual-Router/knx_virtual_iot_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
+           D:/a/KNX-IOT-Virtual-Router/KNX-IOT-Virtual-Router/build_${{ matrix.config.option_name }}/knx_iot_virtual_router_gui.exe
+           D:/a/KNX-IOT-Virtual-Router/KNX-IOT-Virtual-Router/knx_iot_virtual_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png

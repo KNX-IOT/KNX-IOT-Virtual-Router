@@ -77,7 +77,7 @@
 /* this file should be externally supplied */
 #include "external_header.h"
 #endif
-#include "knx_virtual_iot_router.h"
+#include "knx_iot_virtual_router.h"
 
 #include <stdlib.h>
 
@@ -607,12 +607,12 @@ int app_initialize_stack()
   */
 #ifdef WIN32
   char storage[400];
-  sprintf(storage,"./knx_virtual_iot_router_%s",g_serial_number);  
+  sprintf(storage,"./knx_iot_virtual_router_%s",g_serial_number);  
   PRINT("\tstorage at '%s' \n",storage);
   oc_storage_config(storage);
 #else
-  PRINT("\tstorage at 'knx_virtual_iot_router_creds' \n");
-  oc_storage_config("./knx_virtual_iot_router_creds");
+  PRINT("\tstorage at 'knx_iot_virtual_router_creds' \n");
+  oc_storage_config("./knx_iot_virtual_router_creds");
 #endif
   
 
