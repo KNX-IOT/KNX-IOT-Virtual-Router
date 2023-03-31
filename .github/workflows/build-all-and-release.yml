@@ -196,7 +196,7 @@ jobs:
       - name: Upload secured linux binaries
         uses: actions/upload-artifact@v3
         with:
-          name: linux_knx_virtual_iot_router_secured
+          name: linux_knx_iot_virtual_router_secured
           path: |
             ./linuxbuild/KNX-IOT-Virtual-Router
 
@@ -226,7 +226,7 @@ jobs:
       - name: Upload secured linux binaries
         uses: actions/upload-artifact@v3
         with:
-          name: linux_knx_virtual_iot_router_unsecured
+          name: linux_knx_iot_virtual_router_unsecured
           path: |
             ./linuxbuild/KNX-IOT-Virtual-Router
 
