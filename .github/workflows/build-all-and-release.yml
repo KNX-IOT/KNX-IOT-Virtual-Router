@@ -187,14 +187,14 @@ jobs:
           git submodule sync --recursive
           git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
           # create the make files in a subfolder
-          mkdir linuxbuild
-          cd linuxbuild
+          mkdir linuxbuildsecured
+          cd linuxbuildsecured
           cmake ../. -DOC_OSCORE_ENABLED=ON
           make all
       
       - name: View generated binaries
         run: |
-          cd linuxbuild
+          cd linuxbuildsecured
           ls
 
       - name: Upload secured linux binaries
@@ -202,7 +202,7 @@ jobs:
         with:
           name: linux_knx_iot_virtual_router_secured
           path: |
-            ./linuxbuild/knx_iot_virtual_router
+            ./linuxbuildsecured/knx_virtual_iot_router
 
   # Build linux unsecured
   linuxUnsecured:
