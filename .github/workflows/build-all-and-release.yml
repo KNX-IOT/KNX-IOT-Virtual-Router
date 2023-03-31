@@ -166,13 +166,13 @@ jobs:
       run: |
          cd win_build_${{ matrix.config.option_name }}
          ls
-         cd ..
     - name: Upload executable ${{ matrix.config.option_name }}
       uses: actions/upload-artifact@v3
       with:
         name: windows_knx_iot_virtual_router_${{ matrix.config.option_name }}
         path: |
            ./win_build_${{ matrix.config.option_name }}/knx_iot_virtual_router_gui.exe
+           cd ..
            ./knx_virtual_iot_router_KNX_S_00FA10019000_P_U3GNY3906MSRDNG8MUR1.png
         
   # Build linux secured
