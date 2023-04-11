@@ -26,7 +26,7 @@
 #endif
 
 #define NO_MAIN
-#include "knx_virtual_iot_router.h"
+#include "knx_iot_virtual_router.h"
 #include "api/oc_knx_dev.h"
 #include "api/oc_knx_sec.h"
 #include "api/oc_knx_fp.h"

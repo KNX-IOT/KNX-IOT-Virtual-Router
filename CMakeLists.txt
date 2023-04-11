@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(knx_virtual_iot_router  C CXX ASM)
+project(knx_iot_virtual_router  C CXX ASM)
  
 # Copyright (c) 2022-2023 Cascoda Ltd
 # All rights reserved.
@@ -60,9 +60,9 @@ else()
   endif()
 endif()
 
-add_executable(knx_virtual_iot_router
-  ${PROJECT_SOURCE_DIR}/knx_virtual_iot_router.c )
-target_link_libraries(knx_virtual_iot_router kisClientServer)
+add_executable(knx_iot_virtual_router
+  ${PROJECT_SOURCE_DIR}/knx_iot_virtual_router.c )
+target_link_libraries(knx_iot_virtual_router kisClientServer)
 
 if(WIN32)
   FetchContent_Declare(
@@ -73,14 +73,14 @@ if(WIN32)
   message(STATUS "Fetching wxWidgets, kindly wait...")
   FetchContent_MakeAvailable(wxWidgets)
 
-  add_executable(knx_virtual_iot_router_gui WIN32
-    ${PROJECT_SOURCE_DIR}/knx_virtual_iot_router.cpp
-    ${PROJECT_SOURCE_DIR}/knx_virtual_iot_router.c)
-  target_link_libraries(knx_virtual_iot_router_gui wx::net wx::core wx::base kisClientServer)
+  add_executable(knx_iot_virtual_router_gui WIN32
+    ${PROJECT_SOURCE_DIR}/knx_iot_virtual_router.cpp
+    ${PROJECT_SOURCE_DIR}/knx_iot_virtual_router.c)
+  target_link_libraries(knx_iot_virtual_router_gui wx::net wx::core wx::base kisClientServer)
   # enable flag to compile the console in, so that the printf of the stack are shown.
-  target_compile_definitions(knx_virtual_iot_router_gui PUBLIC KNX_GUI)
+  target_compile_definitions(knx_iot_virtual_router_gui PUBLIC KNX_GUI)
   if(USE_CONSOLE)
-    set_target_properties(knx_virtual_iot_router_gui PROPERTIES
+    set_target_properties(knx_iot_virtual_router_gui PROPERTIES
       LINK_FLAGS /SUBSYSTEM:CONSOLE )
   endif()
   add_definitions(-DOC_SIMULATION)
