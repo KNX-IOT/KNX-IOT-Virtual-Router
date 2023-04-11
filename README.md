@@ -11,9 +11,7 @@
     - [1.2.3. Data points](#123-data-points)
     - [1.2.4. Parameters](#124-parameters)
     - [1.2.5. MetaData](#125-metadata)
-  - [1.3. Building on Windows](#13-building-on-windows)
-  - [1.4. Building on Linux](#14-building-on-linux)
-  - [5. Installation tools](#5-installation-tools)
+- [2. Other instructions](#2-other-instructions)
 
 <!-- /TOC -->
 
@@ -115,50 +113,6 @@ For querying the metadata items implemented one can use the following commands:
 ```
 ```
 
-## 1.3. Building on Windows
+# 2. Other instructions
 
-From the top level folder of the project execute:
-
-- mkdir build
-- cd build
-- cmake ..
-  - this command retrieves the dependencies from github
-- open solution (sln) created in the build folder with visual studio
-- build the applications in visual studio
-
-To use knx gitlab as source of the KNX-IOT-STACK use the following command:
-
-- cmake .. -DUSE_GITLAB=true
-
-scripts available:
-
-- build.sh , building unsecured version in folder build
-- build_secured.sh , building secured version in folder build_secured
-
-Note that one has to have access to the knx gitlab repo.
-
-Note: see also: https://github.com/KNX-IOT/KNX-IOT-Virtual
-
-## 1.4. Building on Linux
-
-Note: the GUI variant is not available on Linux, only CLI will be build
-
-From the top level folder of the project execute:
-
-- mkdir build_Linux
-- cd build_Linux
-- cmake ..
-  - this command retrieves the dependencies from github
-- make
-
-To use knx gitlab as source of the KNX-IOT-STACK use the following command:
-
-- cmake .. -DUSE_GITLAB=true
-
-Note that one has to have access to the knx gitlab repo.
-
-Note: see also: https://github.com/KNX-IOT/KNX-IOT-Virtual
-
-## 5. Installation tools
-
-please download the x-copy of ETS 6.
+Please take a look at https://github.com/KNX-IOT/KNX-IOT-Virtual
