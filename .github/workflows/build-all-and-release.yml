@@ -40,6 +40,17 @@ env:
               \"cc\": \"cl\",
               \"cxx\": \"cl\",
               \"environment_script\": \"C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat\",
+              \"option\": \"-D OC_OSCORE_ENABLED=ON -DUSE_CONSOLE=OFF -DOC_DNS_SD_ENABLED=ON\",
+              \"option_name\": \"secured_mdns\",
+            },
+            {
+              \"name\": \"Windows Latest MSVC\",
+              \"artifact\": \"Windows-MSVC.tar.xz\",
+              \"os\": \"windows-latest\",
+              \"build_type\": \"Release\",
+              \"cc\": \"cl\",
+              \"cxx\": \"cl\",
+              \"environment_script\": \"C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat\",
               \"option\": \"-D OC_OSCORE_ENABLED=ON -DUSE_CONSOLE=ON\",
               \"option_name\": \"secured_debuginfo\",
             },
@@ -292,7 +303,11 @@ jobs:
         name: windows_knx_iot_virtual_router_unsecured
     - uses: actions/download-artifact@v1
       with:
+        name: windows_knx_iot_virtual_router_secured_mdns
+    - uses: actions/download-artifact@v1
+      with:
         name: windows_knx_iot_virtual_router_secured_debuginfo
+
 
     # Zip them
     - name: Zip the release assets
@@ -301,6 +316,7 @@ jobs:
         zip -r linux_knx_iot_virtual_router_unsecured.zip linux_knx_iot_virtual_router_unsecured
         zip -r windows_knx_iot_virtual_router_secured.zip windows_knx_iot_virtual_router_secured
         zip -r windows_knx_iot_virtual_router_unsecured.zip windows_knx_iot_virtual_router_unsecured
+        zip -r windows_knx_iot_virtual_router_secured_mdns.zip windows_knx_iot_virtual_router_secured_mdns
         zip -r windows_knx_iot_virtual_router_secured_debuginfo.zip windows_knx_iot_virtual_router_secured_debuginfo
 
     - name: Release secured linux
@@ -343,6 +359,16 @@ jobs:
         asset_name: windows_knx_iot_virtual_router_unsecured.zip
         asset_content_type: application/zip
 
+    - name: Release secured mdns windows
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{steps.create_release.outputs.upload_url}}
+        asset_path: ./windows_knx_iot_virtual_router_secured_mdns.zip
+        asset_name: windows_knx_iot_virtual_router_secured_mdns.zip
+        asset_content_type: application/zip
+        
     - name: Release secured debuginfo windows
       uses: actions/upload-release-asset@v1
       env:
