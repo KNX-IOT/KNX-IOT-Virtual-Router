@@ -1,5 +1,5 @@
-![Linux](https://github.com/KNX-IOT/knx_iot_virtual_router/actions/workflows/cmake-linux.yml/badge.svg)
-![Windows](https://github.com/KNX-IOT/knx_iot_virtual_router/actions/workflows/cmake-windows.yml/badge.svg)
+![Linux](https://github.com/KNX-IOT/KNX-IOT-Virtual-Router/actions/workflows/cmake-linux.yml/badge.svg)
+![Windows](https://github.com/KNX-IOT/KNX-IOT-Virtual-Router/actions/workflows/cmake-windows.yml/badge.svg)
 
 <!-- TOC -->
 
