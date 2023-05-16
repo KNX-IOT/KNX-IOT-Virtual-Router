@@ -12,8 +12,8 @@ set(CASCODA_REPO cascoda-sdk)
 FetchContent_Declare(
     knx-iot-stack
     GIT_REPOSITORY https://github.com/KNX-IOT/KNX-IOT-STACK.git
-    #GIT_TAG master
-    GIT_TAG dev_2
+    GIT_TAG master
+    #GIT_TAG dev_2
 )
 
 # STACK on GitLab
