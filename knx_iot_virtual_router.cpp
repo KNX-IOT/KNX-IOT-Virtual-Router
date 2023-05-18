@@ -16,7 +16,7 @@
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 */
-// 2023-04-17 14:55:55.298454
+// 2023-05-18 08:55:45.541626
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
@@ -361,7 +361,7 @@ void MyFrame::OnProgrammingMode(wxCommandEvent& event)
   // update the UI
   this->updateTextButtons();
   // update mdns
-  knx_publish_service(oc_string(device->serialnumber), device->ia, device->iid, device->pm);
+  knx_publish_service(oc_string(device->serialnumber), device->iid, device->ia, device->pm);
 }
 
 
@@ -384,7 +384,7 @@ void MyFrame::OnSleepyMode(wxCommandEvent& event)
     knx_service_sleep_period(0);
   }
   // update mdns
-  knx_publish_service(oc_string(device->serialnumber), device->ia, device->iid, device->pm);
+  knx_publish_service(oc_string(device->serialnumber), device->iid, device->ia, device->pm);
 }
 
 /**
@@ -767,11 +767,11 @@ void MyFrame::OnAuthTable(wxCommandEvent& event)
             sprintf(line, "\n");
             strcat(text, line);
           }
-          if (oc_string_len(my_entry->osc_alg) > 0) {
-            sprintf(line, "  osc_alg : %s\n",
-              oc_string(my_entry->osc_alg));
-            strcat(text, line);
-          }
+          //if (oc_string_len(my_entry->osc_alg) > 0) {
+          //  sprintf(line, "  osc_alg : %s\n",
+          //    oc_string(my_entry->osc_alg));
+          //  strcat(text, line);
+          //}
           if (oc_string_len(my_entry->osc_contextid) > 0) {
             sprintf(line, "  osc_contextid : %s\n",
               oc_string(my_entry->osc_contextid));
@@ -938,7 +938,7 @@ void MyFrame::OnAbout(wxCommandEvent& event)
   
   strcat(text, "(c) Cascoda Ltd\n");
   strcat(text, "(c) KNX.org\n");
-  strcat(text, "2023-04-17 14:55:55.298454");
+  strcat(text, "2023-05-18 08:55:45.541626");
   CustomDialog("About", text);
 }
 
