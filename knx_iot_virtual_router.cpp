@@ -16,7 +16,7 @@
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 */
-// 2023-05-18 15:00:13.817554
+// 2023-05-31 11:27:16.121123
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
@@ -65,6 +65,13 @@ static const wxCmdLineEntryDesc g_cmdLineDesc[] =
 wxCmdLineParser* g_cmd;
 
 
+void toUpper(char *str){
+    while (*str != '\0')
+    {
+        *str = toupper(*str);
+        str++;
+    }
+}
 
 class CustomDialog : public wxDialog
 {
@@ -289,6 +296,7 @@ MyFrame::MyFrame(char* str_serial_number)
   strcat(qrtext, oc_string(device->serialnumber));
   strcat(qrtext, ";P:");
   strcat(qrtext, app_get_password());
+  toUpper(qrtext);
   wxTextCtrl* Statictext2;
   Statictext2 = new wxTextCtrl(this, wxID_ANY, qrtext, wxPoint(10, 10 + ((max_instances + 2) * x_height)), wxSize(width_size*2, x_height), 0);
   Statictext2->SetEditable(false);
@@ -932,13 +940,13 @@ void MyFrame::OnNetIPData(wxCommandEvent& event)
   
   sprintf(line, "key : '%s' \n",oc_string_checked(oc_get_f_netip_key(device_index)));
   strcpy(text, line);
-  sprintf(line, "mcast : '%s' \n",oc_string_checked(oc_get_f_netip_mcast(device_index)));
+  sprintf(line, "MulticastAddress : '%s' \n",oc_string_checked(oc_get_f_netip_mcast(device_index)));
   strcat(text, line);
-  sprintf(line, "ttl : '%d' \n",oc_get_f_netip_ttl(device_index));
+  sprintf(line, "TimeToLive : '%d' \n",oc_get_f_netip_ttl(device_index));
   strcat(text, line);
-  sprintf(line, "tol : '%d' \n",oc_get_f_netip_tol(device_index));
+  sprintf(line, "LatencyToleranceInMs : '%d' \n",oc_get_f_netip_tol(device_index));
   strcat(text, line);
-  sprintf(line, "fra : '%d' \n",oc_get_f_netip_fra(device_index));
+  sprintf(line, "LatencyFraction : '%d' \n",oc_get_f_netip_fra(device_index));
   strcat(text, line);
 
   strcpy(windowtext, "NetIP Data ");
@@ -971,7 +979,7 @@ void MyFrame::OnAbout(wxCommandEvent& event)
   
   strcat(text, "(c) Cascoda Ltd\n");
   strcat(text, "(c) KNX.org\n");
-  strcat(text, "2023-05-18 15:00:13.817554");
+  strcat(text, "2023-05-31 11:27:16.121123");
   CustomDialog("About", text);
 }
 
