@@ -16,7 +16,7 @@
 
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 */
-// 2023-06-09 10:11:29.139770
+// 2023-06-15 15:58:51.575333
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include <wx/wxprec.h>
@@ -928,10 +928,19 @@ void MyFrame::OnNetIPData(wxCommandEvent& event)
   if (device == NULL) {
     return;
   }
+
+  uint32_t mcast = oc_get_f_netip_mcast(device_index);
+  
+  // note: only works on windows, but this is a windows application
+  uint32_t ip_0 = (mcast & 0xFF);
+  uint32_t ip_1 = ((mcast >> 8) & 0xFF);
+  uint32_t ip_2 = ((mcast >> 16) & 0xFF);
+  uint32_t ip_3 = ((mcast >> 24)& 0xFF);
   
   sprintf(line, "key : '%s' \n",oc_string_checked(oc_get_f_netip_key(device_index)));
   strcpy(text, line);
-  sprintf(line, "MulticastAddress : '%s' \n",oc_string_checked(oc_get_f_netip_mcast(device_index)));
+  sprintf(line, "MulticastAddress : '%d'[%d:%d:%d:%d] \n",
+    mcast, ip_3, ip_2, ip_1, ip_0);
   strcat(text, line);
   sprintf(line, "TimeToLive : '%d' \n",oc_get_f_netip_ttl(device_index));
   strcat(text, line);
@@ -970,7 +979,7 @@ void MyFrame::OnAbout(wxCommandEvent& event)
   
   strcat(text, "(c) Cascoda Ltd\n");
   strcat(text, "(c) KNX.org\n");
-  strcat(text, "2023-06-09 10:11:29.139770");
+  strcat(text, "2023-06-15 15:58:51.575333");
   CustomDialog("About", text);
 }
 
