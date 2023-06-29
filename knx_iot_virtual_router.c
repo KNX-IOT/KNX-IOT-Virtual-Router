@@ -406,7 +406,7 @@ void app_str_to_upper(char *str){
  * - base path
  * - knx spec version 
  * - hardware version : [0, 1, 3]
- * - firmware version : [0, 1, 5]
+ * - firmware version : [0, 1, 8]
  * - hardware type    : Linux/windows
  * - device model     : KNX virtual IoT Router
  *
@@ -427,8 +427,8 @@ app_init(void)
   oc_core_set_device_hwv(0, 0, 1, 3);
   
   
-  /* set the firmware version 0.1.5 */
-  oc_core_set_device_fwv(0, 0, 1, 5);
+  /* set the firmware version 0.1.8 */
+  oc_core_set_device_fwv(0, 0, 1, 8);
   
 
   /* set the hardware type*/
@@ -502,21 +502,6 @@ factory_presets_cb(size_t device_index, void *data)
     PRINT("factory_presets_cb: resetting device\n");
     oc_knx_device_storage_reset(device_index, 2);
   }
-}
-
-/**
- * @brief restart the device (application depended)
- *
- * @param device_index the device identifier of the list of devices
- * @param data the supplied data.
- */
-void
-restart_cb(size_t device_index, void *data)
-{
-  (void)device_index;
-  (void)data;
-
-  PRINT("-----restart_cb -------\n");
 }
 
 /**
@@ -648,7 +633,6 @@ int app_initialize_stack()
 
   /* set the application callbacks */
   oc_set_hostname_cb(hostname_cb, NULL);
-  oc_set_restart_cb(restart_cb, NULL);
   oc_set_factory_presets_cb(factory_presets_cb, NULL);
   oc_set_swu_cb(swu_cb, (void *)fname);
 
