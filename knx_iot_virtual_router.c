@@ -64,6 +64,8 @@
  */
 #include "oc_api.h"
 #include "oc_core_res.h"
+#include "oc_rep.h"
+#include "oc_helpers.h"
 #include "api/oc_knx_fp.h"
 #include "port/oc_clock.h"
 #include <signal.h>
@@ -114,9 +116,9 @@ volatile int quit = 0;  /**< stop variable, used by handle_signal */
 bool g_reset = false;   /**< reset variable, set by commandline arguments */
 char g_serial_number[20] = "00FA10019000";
 
-/* list all object urls as defines */
 
-/* list all parameter urls as defines */
+
+
 
 
 
@@ -154,110 +156,6 @@ void app_set_bool_variable(char* url, bool value)
  */
 bool app_retrieve_bool_variable(char* url) 
 {
-  return false;
-}
-
-// INTEGER code
-
-/**
- * @brief function to check if the url is represented by a integer
- *
- * @param true = url value is a integer
- * @param false = url is not a integer
- */
-bool app_is_int_url(char* url)
-{
-  return false;
-}
-/**
- * @brief sets the global int variable at the url
- *
- * @param url the url indicating the global variable
- * @param value the value to be set
- */
-void app_set_int_variable(char* url, int value)
-{
-}
-void app_set_integer_variable(char* url, int value)
-{
-  app_set_int_variable(url, value);
-}
-
-/**
- * @brief retrieve the global integer variable at the url
- *
- * @param url the url indicating the global variable
- * @return the value of the variable
- */
-int app_retrieve_int_variable(char* url)
-{
-  return -1;
-}
-
-// DOUBLE code
-
-/**
- * @brief function to check if the url is represented by a double
- *
- * @param true = url value is a double
- * @param false = url is not a double
- */
-bool app_is_double_url(char* url)
-{
-  return false;
-}
-/**
- * @brief sets the global double variable at the url
- *
- * @param url the url indicating the global variable
- * @param value the value to be set
- */
-void app_set_double_variable(char* url, double value)
-{
-}
-/**
- * @brief retrieve the global double variable at the url
- *
- * @param url the url indicating the global variable
- * @return the value of the variable
- */
-double app_retrieve_double_variable(char* url)
-{
-  return -1;
-}
-
-// STRING code
-
-/**
- * @brief function to check if the url is represented by a string
- *
- * @param true = url value is a string
- * @param false = url is not a string
- */
-bool app_is_string_url(char* url)
-{
-  return false;
-}
-
-/**
- * @brief sets the global string variable at the url
- *
- * @param url the url indicating the global variable
- * @param value the value to be set
- */
-void app_set_string_variable(char* url, char* value)
-{
-}
-
-/**
- * @brief retrieve the global string variable at the url
- *
- * @param url the url indicating the global variable
- * @return the value of the variable
- */
-char* app_retrieve_string_variable(char* url)
-{
-  return NULL;
 }
 
 // FAULT code
@@ -348,21 +246,22 @@ int app_init(void);
  * @brief devboard button toggle callback
  *
  */
-void dev_btn_toggle_cb(char *url)
-{
-  PRINT_APP("Handling %s\n", url);
-  bool val = app_retrieve_bool_variable(url);
-  if (val == true)
-  {
-    val = false;
-  }
-  else
-  {
-    val = true;
-  }
-  app_set_bool_variable(url, val);
-  oc_do_s_mode_with_scope(5, url, "w");
-}
+// we no longer have app_set_bool_variable
+//void dev_btn_toggle_cb(char *url)
+//{
+//  PRINT_APP("Handling %s\n", url);
+//  bool val = app_retrieve_bool_variable(url);
+//  if (val == true)
+//  {
+//    val = false;
+//  }
+//  else
+//  {
+//    val = true;
+//  }
+//  app_set_bool_variable(url, val);
+//  oc_do_s_mode_with_scope(5, url, "w");
+//}
 
 /**
  * @brief s-mode response callback
@@ -406,8 +305,8 @@ void app_str_to_upper(char *str){
  * - base path
  * - knx spec version 
  * - hardware version : [0, 1, 3]
- * - firmware version : [0, 1, 8]
- * - hardware type    : Linux/windows
+ * - firmware version : [0, 1, 9]
+ * - hardware type    : LW0001
  * - device model     : KNX virtual IoT Router
  *
  */
@@ -427,12 +326,12 @@ app_init(void)
   oc_core_set_device_hwv(0, 0, 1, 3);
   
   
-  /* set the firmware version 0.1.8 */
-  oc_core_set_device_fwv(0, 0, 1, 8);
+  /* set the firmware version 0.1.9 */
+  oc_core_set_device_fwv(0, 0, 1, 9);
   
 
   /* set the hardware type*/
-  oc_core_set_device_hwt(0, "Linux/windows");
+  oc_core_set_device_hwt(0, "LW0001");
 
   /* set the model */
   oc_core_set_device_model(0, "KNX virtual IoT Router");
@@ -440,12 +339,13 @@ app_init(void)
   oc_set_s_mode_response_cb(oc_add_s_mode_response_cb);
 #define PASSWORD "U3GNY3906MSRDNG8MUR1"
 #ifdef OC_SPAKE
-  oc_spake_set_password(PASSWORD);
+  if (strlen(oc_spake_get_password()) == 0)
+    oc_spake_set_password(PASSWORD);
 
 
   strncpy(serial_number_uppercase, oc_string(device->serialnumber), 19);
   app_str_to_upper(serial_number_uppercase);
-  printf("\n === QR Code: KNX:S:%s;P:%s ===\n", serial_number_uppercase, PASSWORD);
+  printf("\n === QR Code: KNX:S:%s;P:%s ===\n", serial_number_uppercase, oc_spake_get_password());
 #endif
 
   return ret;
@@ -581,6 +481,9 @@ initialize_variables(void)
   /* initialize global variables for resources */
   /* if wanted read them from persistent storage */
   /* parameter variables */
+  uint8_t oc_storage_buf[32];
+  long ret;
+  bool err;
 
 }
 
