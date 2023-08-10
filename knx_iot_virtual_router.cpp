@@ -751,7 +751,7 @@ void MyFrame::OnAuthTable(wxCommandEvent& event)
             sprintf(line, "\n");
             strcat(text, line);
           }
-
+/*
           if (oc_byte_string_len(my_entry->osc_rid) > 0) {
             sprintf(line, "  osc_rid [%d]: ", (int)oc_byte_string_len(my_entry->osc_rid));
             strcat(text, line);
@@ -764,6 +764,7 @@ void MyFrame::OnAuthTable(wxCommandEvent& event)
             sprintf(line, "\n");
             strcat(text, line);
           }
+          */
           if (oc_byte_string_len(my_entry->osc_ms) > 0) {
             sprintf(line, "  osc_ms [%d]: ",(int)oc_byte_string_len(my_entry->osc_ms));
             strcat(text, line);
@@ -788,6 +789,7 @@ void MyFrame::OnAuthTable(wxCommandEvent& event)
             sprintf(line, "\n");
             strcat(text, line);
           }
+          /*
           if (oc_byte_string_len(my_entry->aud) > 0) {
             sprintf(line, "  osc_aud [%d]: ", (int)oc_byte_string_len(my_entry->aud));
             char* ms = oc_string(my_entry->aud);
@@ -799,6 +801,7 @@ void MyFrame::OnAuthTable(wxCommandEvent& event)
             sprintf(line, "\n");
             strcat(text, line);
           }
+          */
           if (my_entry->ga_len > 0) {
             sprintf(line, "  osc_ga : [");
             strcat(text, line);
