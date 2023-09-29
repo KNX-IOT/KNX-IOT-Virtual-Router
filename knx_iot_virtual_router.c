@@ -327,7 +327,7 @@ app_init(void)
   
   
   /* set the firmware version 0.1.9 */
-  oc_core_set_device_fwv(0, 0, 1, 9);
+  oc_core_set_device_fwv(0, 0, 2, 1);
   
 
   /* set the hardware type*/
