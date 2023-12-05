@@ -20,7 +20,10 @@
 A KNX IoT Router is the router functionality between KNX IoT and KNX/NetIP and KNX/TP.
 The configuration of the KNX/NETIP side is done via KNX IoT.
 
-Note: This application only supplies the KNX IoT side, e.g. the configuration part only. So From KNX IoT side this is a full implementation, but from KNX/NetIP there is nothing there. So group messages are NOT transported between KNX/IoT and KNX/NetIP.
+This application only supplies the KNX IoT side, e.g. the configuration part only. 
+So From KNX IoT side this is a full implementation to test the configuration of a KNX IoT Router.
+From KNX/NetIP point of view there is nothing there.
+So group messages are NOT transported between KNX/IoT and KNX/NetIP.
 
 ## 1.1. Applications
 
